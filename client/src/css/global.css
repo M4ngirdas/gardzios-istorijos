@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+    --color-pine-teal: #185045;
+    --color-camel: #B39360;
+    --color-pure-white: #FFFFFF;
+
+    --font-primary: "Montserrat", sans-serif;
+    --font-secondary: "Marcellus", serif;
+}
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply overflow-x-hidden;
+    }
+
+    button,
+    a {
+        @apply cursor-pointer select-none;
+    }
+
+    img {
+        @apply select-none;
+    }
+}

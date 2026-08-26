@@ -1,0 +1,117 @@
+{
+  "soups": {
+    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=1080&auto=format&fit=crop",
+    "items": [
+      {
+        "name": "Šaltibarščiai su bulvėmis",
+        "price": 3.5
+      },
+      {
+        "name": "Lęšių su daržovėmis sriuba",
+        "prices": {
+          "pilna": 1.5,
+          "pusė": 1.2
+        }
+      },
+      {
+        "name": "Rūgštynių sriuba",
+        "prices": {
+          "pilna": 1.5,
+          "pusė": 1.2
+        }
+      },
+      {
+        "name": "Sočioji čili sriuba",
+        "description": "Švelniai aštri",
+        "price": 3.5
+      }
+    ]
+  },
+  "dailySpecials": {
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1080&auto=format&fit=crop",
+    "items": [
+      {
+        "name": "Jautienos kukuliai padaže",
+        "prices": {
+          "pilna": 6.8,
+          "pusė": 5.1
+        }
+      },
+      {
+        "name": "Vištienos filė sūrio plutelėje",
+        "price": 6.5
+      },
+      {
+        "name": "Vištienos filė, užkepta grybais ir sūriu",
+        "price": 6.5
+      },
+      {
+        "name": "Kepti varškėčiai",
+        "description": "Pusės porcijos nėra",
+        "price": 5.9
+      },
+      {
+        "name": "Mūsų gamybos koldūnai su grybais",
+        "price": 5.9
+      }
+    ]
+  },
+  "otherDishes": {
+    "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1080&auto=format&fit=crop",
+    "items": [
+      {
+        "name": "Varškės apkepas su braškėmis",
+        "price": 5.9
+      },
+      {
+        "name": "Silkutė su keptomis bulvėmis",
+        "description": "Burokėliai, svogūnai, grietinė",
+        "price": 4.5
+      },
+      {
+        "name": "Varškės apkepas",
+        "description": "Su grietine ir uogomis",
+        "price": 5.9
+      },
+      {
+        "name": "Cezario salotos su karšta vištienos filė",
+        "price": 6.9
+      },
+      {
+        "name": "Cezario salotos su karšta lašišos filė",
+        "price": 7.9
+      },
+      {
+        "name": "Graikiškos salotos su feta",
+        "price": 5.9
+      }
+    ]
+  },
+  "dessertsAndDrinks": {
+    "image": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1080&auto=format&fit=crop",
+    "items": [
+      {
+        "name": "Dienos pyragas",
+        "prices": {
+          "mažas": 2.5,
+          "didelis": 3.0
+        }
+      },
+      {
+        "name": "Naminis Tinginys",
+        "price": 2.2
+      },
+      {
+        "name": "Mūsų gira / Kombučia / Kompotas",
+        "price": 1.5
+      },
+      {
+        "name": "Šviežiai spaustos sultys",
+        "prices": {
+          "mažas": 0.6,
+          "didelis": 2.0
+        }
+      }
+    ]
+  }
+}
