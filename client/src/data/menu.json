@@ -27,8 +27,8 @@
       }
     ]
   },
-  "dailySpecials": {
-    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1080&auto=format&fit=crop",
+  "dailyMeals": {
+    "image": "/images/daily_meals.jpg",
     "items": [
       {
         "name": "Jautienos kukuliai padaže",
@@ -57,7 +57,7 @@
     ]
   },
   "otherDishes": {
-    "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1080&auto=format&fit=crop",
+    "image": "/images/other_dishes.jpg",
     "items": [
       {
         "name": "Varškės apkepas su braškėmis",
@@ -88,7 +88,7 @@
     ]
   },
   "dessertsAndDrinks": {
-    "image": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1080&auto=format&fit=crop",
+    "image": "/images/dessert.jpg",
     "items": [
       {
         "name": "Dienos pyragas",

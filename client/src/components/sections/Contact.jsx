@@ -1,111 +1,201 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
-import { LuMapPin, LuPhone, LuMail, LuClock, LuExternalLink } from "react-icons/lu"
+import { LuMapPin, LuPhone, LuMail, LuClock, LuNavigation, LuCopy, LuCheck } from "react-icons/lu"
+
+const mapsUrl = "https://www.google.com/maps/place/Bistro+%22Gard%C5%BEios+istorijos%22+-+Senamiestis/@54.8982393,23.8842702,17z/data=!4m6!3m5!1s0x46e723ff0e3fef99:0xfa32da8a9b5282e7!8m2!3d54.8982362!4d23.8868451!16s%2Fg%2F11h00d4p8v?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D"
+
+const embedUrl = "https://maps.google.com/maps?q=54.8982362,23.8868451&z=17&output=embed"
+
+const hours = [
+    { label: "Pirmadienis - Penktadienis", time: "8:00 - 17:00", days: [1, 2, 3, 4, 5] },
+    { label: "Šeštadienis - Sekmadienis", time: "9:00 - 16:00", days: [0, 6] },
+]
+
+const tile = {
+    hidden: { opacity: 0, y: 40, rotate: -1.5 },
+    show: (i) => ({
+        opacity: 1,
+        y: 0,
+        rotate: 0,
+        transition: { duration: 0.8, delay: i * 0.1, ease: "easeOut" },
+    }),
+}
+
+function CopyButton({ value, label }) {
+    const [copied, setCopied] = useState(false)
+
+    async function handleCopy() {
+        try {
+            await navigator.clipboard.writeText(value)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+        } catch (error) {
+            setCopied(false)
+        }
+    }
+
+    return (
+        <button
+            onClick={handleCopy}
+            aria-label={label}
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-accent/60 text-primary-text transition-colors duration-300 hover:bg-accent hover:text-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+            {copied ? <LuCheck className="h-4 w-4" /> : <LuCopy className="h-4 w-4" />}
+            {copied && (
+                <motion.span
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute -top-9 whitespace-nowrap rounded-full bg-primary-text px-3 py-1 font-secondary text-xs text-bg"
+                >
+                    Nukopijuota
+                </motion.span>
+            )}
+        </button>
+    )
+}
 
 export default function Contact() {
+    const today = new Date().getDay()
+
     return (
-        <section id="contact" className="py-24 bg-[#185045]/5 px-8 lg:px-16">
-            <div className="max-w-7xl mx-auto space-y-16">
+        <section id="contact" className="relative overflow-hidden bg-bg px-8 py-28 lg:px-16">
+            <div className="pointer-events-none absolute -left-24 top-20 h-80 w-80 rounded-full border border-dashed border-accent/50" />
+
+            <div className="relative mx-auto max-w-7xl">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center space-y-4 max-w-2xl mx-auto"
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.9, ease: "easeOut" }}
+                    className="max-w-3xl"
                 >
-                    <span className="text-xs font-semibold uppercase tracking-widest text-[#B39360]">Laukiame Jūsų</span>
-                    <h2 className="font-serif text-4xl lg:text-5xl text-[#185045]">
-                        Kontaktai ir Vieta
+                    <h2 className="font-primary text-4xl font-light leading-[1.1] text-primary-text sm:text-5xl xl:text-6xl">
+                        Raskite mus senamiesčio gatvelėse
                     </h2>
-                    <div className="w-16 h-0.5 bg-[#B39360] mx-auto" />
+                    <p className="mt-6 max-w-xl font-secondary text-lg leading-relaxed text-primary-text/80">
+                        Užeikite be iš anksto, paskambinkite dėl staliuko arba parašykite laišką. Visada džiaugiamės svečiais.
+                    </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-6"
-                    >
-                        <div className="bg-[#FFFFFF] p-8 rounded-3xl border border-[#185045]/10 shadow-sm space-y-6">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#185045] text-[#FFFFFF] rounded-2xl shrink-0">
-                                    <LuMapPin className="w-6 h-6 text-[#B39360]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-serif text-xl text-[#185045] mb-1">Adresas</h3>
-                                    <p className="text-[#185045]/70 text-sm font-light">A. Jakšto g. 6, Kaunas, Lietuva</p>
-                                    <p className="text-xs text-[#B39360] mt-1 font-medium">Kauno Senamiestis</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#185045] text-[#FFFFFF] rounded-2xl shrink-0">
-                                    <LuPhone className="w-6 h-6 text-[#B39360]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-serif text-xl text-[#185045] mb-1">Telefonas</h3>
-                                    <a href="tel:+37067552883" className="text-[#185045]/70 text-sm font-light hover:text-[#185045] transition-colors">
-                                        +370 675 52883
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#185045] text-[#FFFFFF] rounded-2xl shrink-0">
-                                    <LuMail className="w-6 h-6 text-[#B39360]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-serif text-xl text-[#185045] mb-1">El. Paštas</h3>
-                                    <a href="mailto:ievos@maistotarnyba.lt" className="text-[#185045]/70 text-sm font-light hover:text-[#185045] transition-colors break-all">
-                                        ievos@maistotarnyba.lt
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#185045] text-[#FFFFFF] rounded-2xl shrink-0">
-                                    <LuClock className="w-6 h-6 text-[#B39360]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-serif text-xl text-[#185045] mb-1">Darbo Laikas</h3>
-                                    <p className="text-[#185045]/70 text-sm font-light">I-V: 08:00 - 18:00</p>
-                                    <p className="text-[#185045]/70 text-sm font-light">VI: 09:00 - 16:00</p>
-                                    <p className="text-[#185045]/70 text-sm font-light">VII: Uždaryta</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a
-                            href="https://www.google.com/maps/place/Bistro+%22Gard%C5%BEios+istorijos%22+-+Senamiestis/@54.8982393,23.8842702,17z/data=!4m6!3m5!1s0x46e723ff0e3fef99:0xfa32da8a9b5282e7!8m2!3d54.8982362!4d23.8868451!16s%2Fg%2F11h00d4p8v?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-4 bg-[#185045] text-[#FFFFFF] rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-[#B39360] hover:text-[#185045] transition-all duration-300 shadow-md"
-                        >
-                            <span>Atverti Google Žemėlapiuose</span>
-                            <LuExternalLink className="w-4 h-4" />
-                        </a>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="lg:col-span-2 h-[500px] lg:h-auto rounded-3xl overflow-hidden border border-[#185045]/10 shadow-sm relative bg-[#FFFFFF]"
+                <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-6 lg:grid-cols-12">
+                    <motion.article
+                        custom={0}
+                        variants={tile}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-60px" }}
+                        className="relative min-h-[26rem] overflow-hidden rounded-[2.5rem] rounded-tl-[8rem] border border-accent p-2 md:col-span-6 lg:col-span-7 lg:row-span-2"
                     >
                         <iframe
-                            title="Bistro Gardžios Istorijos Žemėlapis"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2294.276483259888!2d23.8842702!3d54.8982393!2m3!1f0!0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e723ff0e3fef99%3A0xfa32da8a9b5282e7!2sBistro%20%22Gard%C5%BEios%20istorijos%22%20-%20Senamiestis!5e0!3m2!1slt!2slt!4v1700000000000!5m2!1slt!2slt"
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0 }}
-                            allowFullScreen=""
+                            title="Bistro Gardžios Istorijos vieta žemėlapyje"
+                            src={embedUrl}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            className="w-full h-full grayscale contrast-125 opacity-90 hover:grayscale-0 transition-all duration-500"
+                            className="h-full min-h-[25rem] w-full rounded-[2.2rem] rounded-tl-[7.7rem] border-0 grayscale transition-all duration-700 hover:grayscale-0"
                         />
-                    </motion.div>
+                    </motion.article>
+
+                    <motion.a
+                        custom={1}
+                        variants={tile}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-60px" }}
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        whileHover={{ scale: 1.02, rotate: -1 }}
+                        className="group flex flex-col justify-between rounded-[2.5rem] rounded-tr-[6rem] bg-accent p-8 text-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-text md:col-span-3 lg:col-span-5"
+                    >
+                        <LuMapPin className="h-9 w-9" />
+                        <div className="mt-10">
+                            <h3 className="font-primary text-3xl font-normal">A. Jakšto g. 6</h3>
+                            <p className="mt-2 font-secondary text-base text-bg/95">Kaunas, Lietuva</p>
+                            <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-text px-6 py-2.5 font-secondary text-sm font-semibold text-bg">
+                                <LuNavigation className="h-4 w-4" />
+                                Kaip atvykti
+                            </span>
+                        </div>
+                    </motion.a>
+
+                    <motion.article
+                        custom={2}
+                        variants={tile}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-60px" }}
+                        className="flex flex-col justify-between rounded-[2.5rem] border border-accent bg-bg p-8 md:col-span-3 lg:col-span-5"
+                    >
+                        <div className="flex items-start justify-between">
+                            <LuClock className="h-9 w-9 text-accent" />
+                            <h3 className="font-primary text-2xl font-normal text-primary-text">Darbo laikas</h3>
+                        </div>
+                        <ul className="mt-8 flex flex-col gap-3">
+                            {hours.map((h) => {
+                                const isToday = h.days.includes(today)
+                                return (
+                                    <li
+                                        key={h.label}
+                                        className={
+                                            "flex flex-wrap items-center justify-between gap-2 rounded-full px-5 py-3 font-secondary text-base " +
+                                            (isToday ? "bg-primary-text text-bg" : "bg-accent/10 text-primary-text")
+                                        }
+                                    >
+                                        <span>{h.label}</span>
+                                        <span className="font-semibold">{h.time}</span>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </motion.article>
+
+                    <motion.article
+                        custom={3}
+                        variants={tile}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-60px" }}
+                        className="flex items-center justify-between gap-4 rounded-[2.5rem] rounded-bl-[5rem] bg-accent/15 p-8 md:col-span-3 lg:col-span-6"
+                    >
+                        <a
+                            href="tel:+37067552883"
+                            className="group flex items-center gap-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                        >
+                            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary-text text-bg transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
+                                <LuPhone className="h-6 w-6" />
+                            </span>
+                            <span>
+                                <span className="block font-secondary text-sm italic text-primary-text/70">Skambinkite</span>
+                                <span className="block font-primary text-2xl font-normal text-primary-text">+370 675 52883</span>
+                            </span>
+                        </a>
+                        <CopyButton value="+370 675 52883" label="Nukopijuoti telefono numerį" />
+                    </motion.article>
+
+                    <motion.article
+                        custom={4}
+                        variants={tile}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-60px" }}
+                        className="flex items-center justify-between gap-4 rounded-[2.5rem] rounded-br-[5rem] border border-dashed border-accent p-8 md:col-span-3 lg:col-span-6"
+                    >
+                        <a
+                            href="mailto:ievos@maistotarnyba.lt"
+                            className="group flex min-w-0 items-center gap-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                        >
+                            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-bg transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+                                <LuMail className="h-6 w-6" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block font-secondary text-sm italic text-primary-text/70">Rašykite</span>
+                                <span className="block break-all font-primary text-xl font-normal text-primary-text sm:text-2xl">
+                                    ievos@maistotarnyba.lt
+                                </span>
+                            </span>
+                        </a>
+                        <CopyButton value="ievos@maistotarnyba.lt" label="Nukopijuoti el. pašto adresą" />
+                    </motion.article>
                 </div>
             </div>
         </section>
